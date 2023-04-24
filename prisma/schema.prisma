@@ -7,10 +7,39 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
 }
 
 model Post {
     id        Int      @default(autoincrement())  @id
     title     String
+    content   String?
+    published Boolean @default(false)
+    viewCount Int      @default(0)
+    comments Comment[]
+    author    User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+    authorId  Int?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    // status    PostStatus
+}
+
+//enum PostStatus {
+//    draft
+//    published
+//}
+
+model Comment {
+    id        Int      @default(autoincrement())  @id
+    post Post? @relation(fields: [postId], references: [id], onDelete: Cascade)
+    postId Int?
+    content   String
 }
