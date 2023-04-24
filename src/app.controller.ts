@@ -125,4 +125,14 @@ export class AppController {
     return this.appService.createPost(dto);
   }
 
+  @Get("posts-raw")
+  async getAllPostsRAW(){
+    return this.appService.getAllPostsRAW()
+  }
+
+  @Get("posts-raw/:id")
+  async getOnePostRAW(@Param("id", ParseIntPipe) id: number){
+    return this.appService.getOnePostRAW(id)
+  }
+
 }

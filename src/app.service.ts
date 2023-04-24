@@ -6,6 +6,7 @@ import { UpdatePostDto } from "./dto/update-post.dto";
 import { CommentDto } from "./dto/comment.dto";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { CreateUserPostDto } from "./dto/create-user-post.dto";
+import { Prisma } from "@prisma/client/scripts/default-index";
 
 @Injectable()
 export class AppService {
@@ -237,6 +238,14 @@ export class AppService {
           comments: true
         }
       });
+  }
+
+  async getAllPostsRAW() {
+    return this.dbService.$queryRaw`SELECT * FROM Post`;
+  }
+
+  async getOnePostRAW(postId: number) {
+    return this.dbService.$queryRaw`SELECT * FROM Post WHERE id = ${postId}`;
   }
 
 }
