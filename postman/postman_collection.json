@@ -44,28 +44,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/posts?orderBy=desc&take=10&skip=0",
+					"raw": "http://localhost:3000/posts-raw",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"posts"
-					],
-					"query": [
-						{
-							"key": "orderBy",
-							"value": "desc"
-						},
-						{
-							"key": "take",
-							"value": "10"
-						},
-						{
-							"key": "skip",
-							"value": "0"
-						}
+						"posts-raw"
 					]
 				}
 			},
@@ -77,28 +63,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/posts?orderBy=desc&take=10&skip=0",
+					"raw": "http://localhost:3000/posts-raw/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"posts"
-					],
-					"query": [
-						{
-							"key": "orderBy",
-							"value": "desc"
-						},
-						{
-							"key": "take",
-							"value": "10"
-						},
-						{
-							"key": "skip",
-							"value": "0"
-						}
+						"posts-raw",
+						"1"
 					]
 				}
 			},
