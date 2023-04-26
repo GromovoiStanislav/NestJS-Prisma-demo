@@ -1,12 +1,19 @@
 import { Injectable } from "@nestjs/common";
 import { CreatePostDto } from "./dto/create-post.dto";
 import { DatabaseService } from "./database/database.service";
-import { PrismaClient, User as UserModel, Post as PostModel, Comment as CommentModel } from "@prisma/client";
+import {
+  PrismaClient,
+  User as UserModel,
+  Post as PostModel,
+  Comment as CommentModel,
+  Prisma,
+  Profile
+} from "@prisma/client";
 import { UpdatePostDto } from "./dto/update-post.dto";
 import { CommentDto } from "./dto/comment.dto";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { CreateUserPostDto } from "./dto/create-user-post.dto";
-import { Prisma } from "@prisma/client/scripts/default-index";
+
 
 @Injectable()
 export class AppService {
@@ -203,13 +210,41 @@ export class AppService {
 
 
   async signupUser(userData: CreateUserDto): Promise<UserModel> {
-    return this.dbService.user.create({
-      data: userData
+    // return this.dbService.user.create({
+    //   data: userData
+    // });
+
+    const profileData = userData.profile;
+
+    const postData = userData.posts?.map((post) => {
+      return { title: post.title, content: post.content };
     });
+    return this.dbService.user.create({
+      data: {
+        name: userData.name,
+        email: userData.email,
+        posts: {
+          create: postData
+        },
+        profile: {
+          create: profileData
+        }
+      },
+      include: {
+        profile: true,
+        posts: true
+      }
+    });
+
   }
 
   async getAllUsers(): Promise<UserModel[]> {
-    return this.dbService.user.findMany();
+    return this.dbService.user.findMany({
+      include: {
+        profile: true
+        //posts: true
+      }
+    });
   }
 
 
@@ -247,5 +282,33 @@ export class AppService {
   async getOnePostRAW(postId: number) {
     return this.dbService.$queryRaw`SELECT * FROM Post WHERE id = ${postId}`;
   }
+
+  async createUserProfile(id: number, userBio: { bio: string }): Promise<Profile> {
+    return this.dbService.profile.create({
+      data: {
+        bio: userBio.bio,
+        user: {
+          connect: {
+            id
+          }
+        }
+      }
+    });
+  }
+
+  async updateUserProfile(id: number, userBio: { bio: string }): Promise<UserModel> {
+    return this.dbService.user.update({
+      where: { id },
+      data: {
+        profile: {
+          update: userBio
+        }
+      },
+      include: {
+        profile: true
+      }
+    });
+  }
+
 
 }

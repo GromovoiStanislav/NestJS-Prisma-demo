@@ -101,6 +101,25 @@ export class AppController {
     return this.appService.getAllUsers();
   }
 
+
+  @Post("users/:id/profile")
+  async createUserProfile(
+    @Param("id", ParseIntPipe) id: number,
+    @Body() userBio: { bio: string }
+  ) {
+    return this.appService.createUserProfile(id, userBio);
+  }
+
+
+  @Put("users/:id/profile")
+  async updateUserProfile(
+    @Param("id", ParseIntPipe) id: number,
+    @Body() userBio: { bio: string }
+  ) {
+    return this.appService.updateUserProfile(id, userBio);
+  }
+
+
   @Get("users/:id/drafts")
   async getDraftsByUser(@Param("id", ParseIntPipe) id: number) {
     return this.appService.getDraftsByUser(id);
@@ -126,13 +145,14 @@ export class AppController {
   }
 
   @Get("posts-raw")
-  async getAllPostsRAW(){
-    return this.appService.getAllPostsRAW()
+  async getAllPostsRAW() {
+    return this.appService.getAllPostsRAW();
   }
 
   @Get("posts-raw/:id")
-  async getOnePostRAW(@Param("id", ParseIntPipe) id: number){
-    return this.appService.getOnePostRAW(id)
+  async getOnePostRAW(@Param("id", ParseIntPipe) id: number) {
+    return this.appService.getOnePostRAW(id);
   }
+
 
 }

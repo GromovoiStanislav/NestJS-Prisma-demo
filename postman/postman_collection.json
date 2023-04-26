@@ -297,6 +297,66 @@
 			"response": []
 		},
 		{
+			"name": "users/:id/profile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bio\": \"bio...\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/1/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"1",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users/:id/profile",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bio\": \"bio...bio\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/1/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"1",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "posts/:id/publish",
 			"request": {
 				"method": "PUT",
@@ -345,7 +405,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"authorEmail\": \"tom@mail.com\",\r\n    \"title\":\"New post\",\r\n    \"content\":\"Content of new post\"\r\n  \r\n}",
+					"raw": "{\r\n    \"authorEmail\": \"tom@mail.com\",\r\n    \"title\":\"New post\",\r\n    \"content\":\"Content of new post\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -403,7 +463,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Tom\",\r\n    \"email\":\"tom@mail.com\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Sim\",\r\n    \"email\":\"sim@mail.com\",\r\n    \"profile\": {\"bio\": \"bio...\"},\r\n    \"posts\":[\r\n        {\r\n        \"title\":\"New post 1\",\r\n        \"content\":\"Content of new post\"\r\n        },\r\n         {\r\n        \"title\":\"New post 2\",\r\n        \"content\":\"Content of new post\"\r\n        }\r\n    ]\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
