@@ -280,7 +280,7 @@ export class AppService {
   }
 
   async getOnePostRAW(postId: number) {
-    return this.dbService.$queryRaw`SELECT * FROM Post WHERE id = ${postId}`;
+    return this.dbService.$queryRaw(Prisma.sql`SELECT * FROM Post WHERE id = ${postId}`);
   }
 
   async createUserProfile(id: number, userBio: { bio: string }): Promise<Profile> {
